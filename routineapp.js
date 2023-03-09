@@ -34,6 +34,17 @@ sundayInput.addEventListener('input', () => {
     localStorage.setItem('sundayTask', sundayInput.value);
 });
 
+windowaddEventListner('load', () => {
+    mondayInputvalue = localStorage.getItem('mondayTask') ||'';
+    tuesdayInputvalue = localStorage.getItem('tuesdayTask') ||'';
+    wednesdayInputvalue = localStorage.getItem('wednesdayTask')||'';
+    thursdayInputvalue = localStorage.getItem('thursdayTask')||'';
+    fridayInputvalue = localStorage.getItem('fridayTask')||'';
+    saturdayInputvalue = localStorage.getItem('saturdayTask')||'';
+    sundayInputvalue = localStorage.getItem('sundayTask')||''
+
+})
+
 
 
 

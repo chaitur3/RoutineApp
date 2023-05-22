@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <link rel = "icon" type="image/png" href="img/clock"> -->
+    <!-- <script type="text/javascript" src="routineapp.js"></script> -->
+    <!-- <link rel="stylesheet" href="global.css"> -->
+
+    <?!= include("css") ?>
+    <!-- <?!= include("js") ?> -->
+    <meta charset="UTF-8">
+    <title>Routine</title>
+</head>
+<body>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <div class="header_div">
+        <p class="header_div">Plan your day out:</p>
+    </div>
+    <div class="days_div">
+        <p class="days_div">Monday</p>
+        <input type="text" id="monday" placeholder="Enter your plan for Monday">
+        <button onclick="savePlan('monday')">Save</button>
+        <p class="days_div">Tuesday</p>
+        <input type="text" id="tuesday" placeholder="Enter your plan for Tuesday">
+        <button onclick="savePlan('tuesday')">Save</button>
+        <p class="days_div">Wednesday</p>
+        <input type="text" id="wednesday" placeholder="Enter your plan for Wednesday">
+        <button onclick="savePlan('wednesday')">Save</button>
+        <p class="days_div">Thursday</p>
+        <input type="text" id="thursday" placeholder="Enter your plan for Thursday">
+        <button onclick="savePlan('thursday')">Save</button>
+        <p class="days_div">Friday</p>
+        <input type="text" id="friday" placeholder="Enter your plan for Friday">
+        <button onclick="savePlan('friday')">Save</button>
+        <p class="days_div">Saturday</p>
+        <input type="text" id="saturday" placeholder="Enter your plan for Saturday">
+        <button onclick="savePlan('saturday')">Save</button>
+        <p class="days_div">Sunday</p>
+        <input type="text" id="sunday" placeholder="Enter your plan for Sunday">
+        <button onclick="savePlan('sunday')">Save</button>
+    </div>
+
+    <script>
+        function onSuccess(results) {
+            console.log(results[0][0]);
+        }
+
+        function savePlan(day) {
+            var plan = document.getElementById(day).value;
+            localStorage.setItem(day, plan);
+            google.script.run.saveTask(day, plan); // Call the saveTask function in the Google Apps Script
+        }
+
+        function loadPlans() {
+            document.getElementById('monday').value = localStorage.getItem('monday');
+            document.getElementById('tuesday').value = localStorage.getItem('tuesday');
+            document.getElementById('wednesday').value = localStorage.getItem('wednesday');
+            document.getElementById('thursday').value = localStorage.getItem('thursday'); // Corrected typo
+            document.getElementById('friday').value = localStorage.getItem('friday');
+            document.getElementById('saturday').value = localStorage.getItem('saturday');
+            document.getElementById('sunday').value = localStorage.getItem('sunday');
+
+            google.script.run.withSuccessHandler(onSuccess).getTasks(); // Call the getTasks function in the Google Apps Script
+        }
+
+        loadPlans();
+    </script>
+</body>
+</html>
